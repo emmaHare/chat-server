@@ -1,8 +1,8 @@
-#wwroom 
+# wwroom 
 Emma Hare uses VSCode
 Zabby uses VIM
 
-##NOTES
+## NOTES
 table messages:
 id			pkey
 posted_on
@@ -15,6 +15,7 @@ password
 created_at	
 last_login
 
-##TODO
--db structure
+## TODO
++db structure
+-display test data
 
