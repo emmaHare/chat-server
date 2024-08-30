@@ -12,7 +12,7 @@ password: "emmahare_187#",
 database: "wwroomdb",
 });
 
-//a function to connect to the db
+//a function to connect to the db and get the data
 async function get_data(){
 	//var for the connection
 	let conn;
@@ -37,7 +37,7 @@ async function get_data(){
 		return [];
 	}finally{
 		//when everything was successful it will close the connection to the db
-		if(conn) conn.end;
+		if(conn) conn.release();
 	}
 }
 
@@ -47,52 +47,47 @@ key: fs.readFileSync("key.pem"),
 	 cert: fs.readFileSync("cert.pem")
 };
 
+//function to serve files to reduce code repetment
+function serve_file(res, filePath, contentType){
+	fs.readFile(filePath, (err, data) => {
+			if(err){
+			res.writeHead(500, {"Content-Type": "text/plain"});
+			res.end("500 Internal Server Error");
+			return;
+			}
+			res.writeHead(200, {"Content-Type": contentType});
+			res.end(data);
+			});
+}
+
 //https server creation
 const server=https.createServer(options, async (req, res)=>{
-		if(req.url==="/"){
-		//serve the html file
-		fs.readFile(path.join(__dirname, "index.html"), (err, data)=>{
-				if(err){
+		switch(req.url) {
+		case "/":
+		await serve_file(res, path.join(__dirname, "index.html"), "text/html");
+		break;
+		case "/style.css":
+		await serve_file(res, path.join(__dirname, "style.css"), "text/css");
+		break;
+		case "/script.js":
+		await serve_file(res, path.join(__dirname, "script.js"), "app/js");
+		break;
+		case "/data":
+		try{
+		const data=await get_data();
+		res.writeHead(200, {"Content-Type": "app/json"});
+		res.end(JSON.stringify(data));
+				}catch(err){
 				res.writeHead(500, {"Content-Type": "text/plain"});
 				res.end("500 Internal Server Error");
-				return;
 				}
-				res.writeHead(200, {"Content-Type": "text/html"});
-				res.end(data);
-				});
-		}else if(req.url==="/style.css"){
-		//serve the js file
-		fs.readFile(path.join(__dirname, "style.css"), (err, data)=>{
-				if(err){
-				res.writeHead(500, {"Content-Type": "text/plain"});
-				res.end("500 Internal Server Error");
-				return;
+				break;
+				default:
+				res.writeHead(404, {"Content-Type": "text/plain"});
+				res.end("404 Not Found");
+				break;
 				}
-				res.writeHead(200, {"Content-Type": "text/css"});
-				res.end(data);
 				});
-		}else if(req.url==="/script.js"){
-		//serve the js file
-		fs.readFile(path.join(__dirname, "script.js"), (err, data)=>{
-				if(err){
-				res.writeHead(500, {"Content-Type": "text/plain"});
-				res.end("500 Internal Server Error");
-				return;
-				}
-				res.writeHead(200, {"Content-Type": "application/javascript"});
-				res.end(data);
-				});
-		}else if(req.url==="/data"){
-			//serve the data as json
-			const data=await get_data();
-			res.writeHead(200, {"Content-Type": "application/json"});
-			res.end(JSON.stringify(data));
-		}else{
-			//handle 404 for other routes
-			res.writeHead(404, {"Content-Type": "text/plain"});
-			res.end("404 Not Found");
-		}
-});
 
 //starts server
 server.listen(443, ()=>{
