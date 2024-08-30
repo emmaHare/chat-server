@@ -1,4 +1,4 @@
-async function fetch_data(){
+async function fetchData(){
 	try{
 		const response=await fetch("/data");
 		if(!response.ok) throw new Error("Network response was not ok");
@@ -21,4 +21,4 @@ async function fetch_data(){
 }
 
 //fetch data when page loads
-window.onload=fetch_data;
+window.onload=fetchData;

@@ -13,7 +13,7 @@ database: "wwroomdb",
 });
 
 //a function to connect to the db and get the data
-async function get_data(){
+async function getData(){
 	//var for the connection
 	let conn;
 	try {
@@ -48,7 +48,7 @@ key: fs.readFileSync("key.pem"),
 };
 
 //function to serve files to reduce code repetment
-function serve_file(res, filePath, contentType){
+function serveFile(res, filePath, contentType){
 	fs.readFile(filePath, (err, data) => {
 			if(err){
 			res.writeHead(500, {"Content-Type": "text/plain"});
@@ -62,31 +62,31 @@ function serve_file(res, filePath, contentType){
 
 //https server creation
 const server = https.createServer(options, async (req, res) => {
-    try {
-        switch (req.url) {
-            case "/":
-                serveFile(res, path.join(__dirname, "index.html"), "text/html");
-                break;
-            case "/style.css":
-                serveFile(res, path.join(__dirname, "style.css"), "text/css");
-                break;
-            case "/script.js":
-                serveFile(res, path.join(__dirname, "script.js"), "application/javascript");
-                break;
-            case "/data":
-                const data = await get_data();
-                res.writeHead(200, { "Content-Type": "application/json" });
-                res.end(JSON.stringify(data));
-                break;
-            default:
-                res.writeHead(404, { "Content-Type": "text/plain" });
-                res.end("404 Not Found");
-                break;
-        }
-    } catch (err) {
-        res.writeHead(500, { "Content-Type": "text/plain" });
-        res.end("500 Internal Server Error");
-    }
+		try {
+		switch (req.url) {
+		case "/":
+		serveFile(res, path.join(__dirname, "index.html"), "text/html");
+		break;
+		case "/style.css":
+		serveFile(res, path.join(__dirname, "style.css"), "text/css");
+		break;
+		case "/script.js":
+		serveFile(res, path.join(__dirname, "script.js"), "application/javascript");
+		break;
+		case "/data":
+		const data = await getData();
+		res.writeHead(200, { "Content-Type": "application/json" });
+		res.end(JSON.stringify(data));
+		break;
+		default:
+		res.writeHead(404, { "Content-Type": "text/plain" });
+		res.end("404 Not Found");
+		break;
+		}
+		} catch (err) {
+			res.writeHead(500, { "Content-Type": "text/plain" });
+			res.end("500 Internal Server Error");
+		}
 });
 
 //starts server
