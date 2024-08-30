@@ -61,33 +61,33 @@ function serve_file(res, filePath, contentType){
 }
 
 //https server creation
-const server=https.createServer(options, async (req, res)=>{
-		switch(req.url) {
-		case "/":
-		await serve_file(res, path.join(__dirname, "index.html"), "text/html");
-		break;
-		case "/style.css":
-		await serve_file(res, path.join(__dirname, "style.css"), "text/css");
-		break;
-		case "/script.js":
-		await serve_file(res, path.join(__dirname, "script.js"), "app/js");
-		break;
-		case "/data":
-		try{
-		const data=await get_data();
-		res.writeHead(200, {"Content-Type": "app/json"});
-		res.end(JSON.stringify(data));
-				}catch(err){
-				res.writeHead(500, {"Content-Type": "text/plain"});
-				res.end("500 Internal Server Error");
-				}
-				break;
-				default:
-				res.writeHead(404, {"Content-Type": "text/plain"});
-				res.end("404 Not Found");
-				break;
-				}
-				});
+const server = https.createServer(options, async (req, res) => {
+    try {
+        switch (req.url) {
+            case "/":
+                serveFile(res, path.join(__dirname, "index.html"), "text/html");
+                break;
+            case "/style.css":
+                serveFile(res, path.join(__dirname, "style.css"), "text/css");
+                break;
+            case "/script.js":
+                serveFile(res, path.join(__dirname, "script.js"), "application/javascript");
+                break;
+            case "/data":
+                const data = await get_data();
+                res.writeHead(200, { "Content-Type": "application/json" });
+                res.end(JSON.stringify(data));
+                break;
+            default:
+                res.writeHead(404, { "Content-Type": "text/plain" });
+                res.end("404 Not Found");
+                break;
+        }
+    } catch (err) {
+        res.writeHead(500, { "Content-Type": "text/plain" });
+        res.end("500 Internal Server Error");
+    }
+});
 
 //starts server
 server.listen(443, ()=>{
