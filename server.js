@@ -60,6 +60,17 @@ const server=https.createServer(options, async (req, res)=>{
 				res.writeHead(200, {"Content-Type": "text/html"});
 				res.end(data);
 				});
+		}else if(req.url==="/style.css"){
+		//serve the js file
+		fs.readFile(path.join(__dirname, "style.css"), (err, data)=>{
+				if(err){
+				res.writeHead(500, {"Content-Type": "text/plain"});
+				res.end("500 Internal Server Error");
+				return;
+				}
+				res.writeHead(200, {"Content-Type": "text/css"});
+				res.end(data);
+				});
 		}else if(req.url==="/script.js"){
 		//serve the js file
 		fs.readFile(path.join(__dirname, "script.js"), (err, data)=>{
