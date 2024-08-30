@@ -9,7 +9,7 @@ const pool=mariadb.createPool({
 host: "127.0.0.1",
 user: "wwroom",		
 password: "emmahare_187#",
-database: "test00",//TODO own db
+database: "wwroomdb",
 });
 
 //a function to connect to the db
@@ -20,11 +20,11 @@ async function get_data(){
 		//connect to db via the var from the pool
 		conn=await pool.getConnection();
 		//sql execute sql and save output
-		const rows_from_table00=await conn.query("select * from table00;");
+		const rows_from_messages=await conn.query("select * from messages;");
 		//checks if data is in table
-		if(rows_from_table00.length>0){
+		if(rows_from_messages.length>0){
 			//there is data in the table
-			return rows_from_table00;
+			return rows_from_messages;
 		}else{
 			//no data in the table
 			console.log("NO DATA");
@@ -44,7 +44,7 @@ async function get_data(){
 //https server options
 const options={
 key: fs.readFileSync("key.pem"),
-cert: fs.readFileSync("cert.pem")
+	 cert: fs.readFileSync("cert.pem")
 };
 
 //https server creation
