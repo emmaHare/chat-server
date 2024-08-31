@@ -1,0 +1,6 @@
+node_modules/
+cert.pem
+package-lock.json
+dbconfig.sql
+key.pem
+.vscode/
