@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
-        <script src="front.js"></script>
+        <script src="front.js" defer></script>
         <title>wwroom</title>
     </head>
 <body>
@@ -12,14 +12,6 @@
         <h1>wwroom</h1>
     </head>
     <main>
-        <form class="input-form">
-            <input type="text" 
-            id="name-input"
-            placeholder="your name..."
-            maxlength="12"
-            >
-            <button type="submit" id="name-btn">done</button>
-        </form>
         
         <ul class="chat-display">
             <form class="msg-form">
@@ -32,10 +24,79 @@
             </form>
         </ul>
 
-        <dialog id="modal">
-            <form method="dialog" id="modal-form">
-                <legend>This is the modal</legend>
-                <p>These are the rules</p>
+        <dialog id="first-modal" class="modal">
+            <form method="dialog" id="welcome-form">
+                <ul>
+                    <h1>Welcome to wwroom</h1>
+                    <h3>The worldwide chatroom for anyone and everyone 18+</h3>
+                    <h5>Please stick to the rules.</h5>
+                </ul>
+                <ul>
+                    <li>Do not be disrespectful.</li>
+                    <li>Do not be a bitch</li>
+                    <li>Be chill</li>
+                    <li>No spamming or advertisement</li>
+                </ul>
+                
+                <div class="register-btns">
+                    <button id="login-btn">log in</button>
+                    <button id="signup-btn">sign up</button>
+                </div>
+            </form>
+        </dialog>
+        <dialog id="signup-modal" class="modal">
+            <form method="dialog" id="signup-form">
+                <ul>
+                    <li>
+                        <input 
+                        id="s-user-input"
+                        type="text"
+                        placeholder="your username"
+                        maxlength="20"
+                        >
+                    </li>
+                    <li>
+                        <input 
+                        id="email-input"
+                        type="email"
+                        placeholder="email"
+                        >
+                    </li>
+                    <li>
+                        <input
+                        id="pword-input"
+                        type="password"
+                        placeholder="password"
+                        >
+                    </li>
+                    <li>
+                        <input 
+                        id="pword-confirm"
+                        type="password"
+                        placeholder="confirm password">
+                    </li>
+                    <button type="submit" id="signup-submit">Create Account</button>
+                </ul>
+            </form>
+        </dialog>
+        <dialog id="login-modal">
+            <form method="dialog" id="login-form">
+                <ul>
+                    <li>
+                        <input
+                        id="l-user-input"
+                        type="text"
+                        placeholder="username"
+                        >
+                    </li>
+                    <li>
+                        <input 
+                        id="user-password"
+                        type="password"
+                        placeholder="password">
+                    </li>
+                    <button type="submit">Log in</button>
+                </ul>
             </form>
         </dialog>
     </main>
