@@ -9,22 +9,22 @@ const pool=mariadb.createPool({
 host: "127.0.0.1",
 user: "wwroom",		
 password: "emmahare_187#",
-database: "test00",//TODO own db
+database: "wwroomdb",
 });
 
-//a function to connect to the db
-async function get_data(){
+//a function to connect to the db and get the data
+async function getData(){
 	//var for the connection
 	let conn;
 	try {
 		//connect to db via the var from the pool
 		conn=await pool.getConnection();
 		//sql execute sql and save output
-		const rows_from_table00=await conn.query("select * from table00;");
+		const rows_from_messages=await conn.query("select * from messages;");
 		//checks if data is in table
-		if(rows_from_table00.length>0){
+		if(rows_from_messages.length>0){
 			//there is data in the table
-			return rows_from_table00;
+			return rows_from_messages;
 		}else{
 			//no data in the table
 			console.log("NO DATA");
@@ -37,49 +37,55 @@ async function get_data(){
 		return [];
 	}finally{
 		//when everything was successful it will close the connection to the db
-		if(conn) conn.end;
+		if(conn) conn.release();
 	}
 }
 
 //https server options
 const options={
 key: fs.readFileSync("key.pem"),
-cert: fs.readFileSync("cert.pem")
+	 cert: fs.readFileSync("cert.pem")
 };
 
+//function to serve files to reduce code repetment
+function serveFile(res, filePath, contentType){
+	fs.readFile(filePath, (err, data) => {
+			if(err){
+			res.writeHead(500, {"Content-Type": "text/plain"});
+			res.end("500 Internal Server Error");
+			return;
+			}
+			res.writeHead(200, {"Content-Type": contentType});
+			res.end(data);
+			});
+}
+
 //https server creation
-const server=https.createServer(options, async (req, res)=>{
-		if(req.url==="/"){
-		//serve the html file
-		fs.readFile(path.join(__dirname, "index.html"), (err, data)=>{
-				if(err){
-				res.writeHead(500, {"Content-Type": "text/plain"});
-				res.end("500 Internal Server Error");
-				return;
-				}
-				res.writeHead(200, {"Content-Type": "text/html"});
-				res.end(data);
-				});
-		}else if(req.url==="/script.js"){
-		//serve the js file
-		fs.readFile(path.join(__dirname, "script.js"), (err, data)=>{
-				if(err){
-				res.writeHead(500, {"Content-Type": "text/plain"});
-				res.end("500 Internal Server Error");
-				return;
-				}
-				res.writeHead(200, {"Content-Type": "application/javascript"});
-				res.end(data);
-				});
-		}else if(req.url==="/data"){
-			//serve the data as json
-			const data=await get_data();
-			res.writeHead(200, {"Content-Type": "application/json"});
-			res.end(JSON.stringify(data));
-		}else{
-			//handle 404 for other routes
-			res.writeHead(404, {"Content-Type": "text/plain"});
-			res.end("404 Not Found");
+const server = https.createServer(options, async (req, res) => {
+		try {
+		switch (req.url) {
+		case "/":
+		serveFile(res, path.join(__dirname, "index.html"), "text/html");
+		break;
+		case "/style.css":
+		serveFile(res, path.join(__dirname, "style.css"), "text/css");
+		break;
+		case "/script.js":
+		serveFile(res, path.join(__dirname, "script.js"), "application/javascript");
+		break;
+		case "/data":
+		const data = await getData();
+		res.writeHead(200, { "Content-Type": "application/json" });
+		res.end(JSON.stringify(data));
+		break;
+		default:
+		res.writeHead(404, { "Content-Type": "text/plain" });
+		res.end("404 Not Found");
+		break;
+		}
+		} catch (err) {
+			res.writeHead(500, { "Content-Type": "text/plain" });
+			res.end("500 Internal Server Error");
 		}
 });
 

@@ -1,0 +1,4 @@
+<Files "server.js">
+    Order Allow, Deny
+    Deny from Allow
+</Files>

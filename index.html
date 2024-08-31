@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <title>Document</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <script src="front.js"></script>
+        <title>wwroom</title>
+    </head>
 <body>
     <head>
         <h1>wwroom</h1>
@@ -22,9 +22,6 @@
         </form>
         
         <ul class="chat-display">
-            <li>
-                
-            </li>
             <form class="msg-form">
             <input type="text"
             id="msg-input"
@@ -35,7 +32,12 @@
             </form>
         </ul>
 
-        
+        <dialog id="modal">
+            <form method="dialog" id="modal-form">
+                <legend>This is the modal</legend>
+                <p>These are the rules</p>
+            </form>
+        </dialog>
     </main>
 </body>
 </html>
