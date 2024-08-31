@@ -30,6 +30,10 @@ button{
     padding: 5px 10px;
 }
 
+button:focus{
+    outline: none;
+}
+
 .chat-display{
     position: relative;
     display: flex;
@@ -57,3 +61,102 @@ button{
 #msg-btn{
     padding: 5px 10px;
 }
+
+dialog::backdrop{
+    background-color: rgba(0, 0, 0, 0.37);
+}
+
+#first-modal{
+    position: fixed;
+    z-index: 1;
+    top: 7%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 300px;
+    border: none;
+    border-radius: 2%;
+    background-color: rgb(255, 255, 190);
+}
+
+#welcome-form{
+    display: flex;
+    flex-direction: column;
+    border: none;
+    padding: 5% 10%;
+    gap: 3%;
+}
+
+#welcome-form h1{
+    font-size: 2.8em;
+}
+
+#welcome-form h3{
+    font-size: 1.3em;
+}
+
+#welcome-form h5{
+    font-size: 1.2em;
+}
+
+#welcome-form ul{
+    list-style-position: inside;
+}
+
+#welcome-form li{
+    font-size: 1.1em;
+}
+
+.register-btns{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.register-btns button{
+    width: 100%;
+    border: none;
+    transition: ease-in-out 0.2s; 
+}
+
+.register-btns button:hover{
+    transform: scale(1.05);
+}
+
+.register-btns button:active{
+    transform: scale(0.95);
+}
+
+#login-btn{
+    background-color: rgb(255, 198, 92);
+}
+
+#signup-btn{
+    background-color: rgb(127, 223, 255);
+}
+
+#signup-modal{
+    position: fixed;
+    z-index: 1;
+    top: 7%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 300px;
+    border: none;
+    border-radius: 2%;
+    background-color: rgb(255, 255, 190);
+}
+
+#signup-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#signup-form ul{
+    list-style: none;
+}
+
+
+
