@@ -14,12 +14,22 @@ table users: id, username, password, created_at, last_login
 
 +db structure
 
+-add email to users table
+
 -dbconfig aus gitignore
 
 -display test data
 
 ### frontend
 
-+structure
++base structure
 
--modal
++base styling
+
++modals
+
+-store modal shown info in users browser
+
+-chat structure
+
+-chat styling
