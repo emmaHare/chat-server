@@ -3,8 +3,13 @@
     padding: 0px;
 }
 
-body{
+body, main, .chat-display, .msg-form, 
+#welcome-form,.register-btns, #signup-form,
+#signup-form ul, #signup-form li, #login-form, #login-form ul{
     display: flex;
+}
+
+body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -12,7 +17,6 @@ body{
 }
 
 main{
-    display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -36,7 +40,6 @@ button:focus{
 
 .chat-display{
     position: relative;
-    display: flex;
     height: 100%;
     width: 100%;
     background-color: rgb(168, 168, 168);
@@ -47,7 +50,6 @@ button:focus{
 .msg-form{
     position: absolute;
     bottom: 1%;
-    display: flex;
     justify-content: center;
     gap: 2px;
     height: 5%;
@@ -69,7 +71,7 @@ dialog::backdrop{
 #first-modal{
     position: fixed;
     z-index: 1;
-    top: 7%;
+    top: 1%;
     left: 50%;
     transform: translate(-50%, 50%);
     width: 300px;
@@ -79,7 +81,6 @@ dialog::backdrop{
 }
 
 #welcome-form{
-    display: flex;
     flex-direction: column;
     border: none;
     padding: 5% 10%;
@@ -107,7 +108,6 @@ dialog::backdrop{
 }
 
 .register-btns{
-    display: flex;
     width: 100%;
     justify-content: center;
     gap: 8px;
@@ -128,35 +128,113 @@ dialog::backdrop{
     transform: scale(0.95);
 }
 
-#login-btn{
+#to-login-btn{
     background-color: rgb(255, 198, 92);
 }
 
-#signup-btn{
+#to-signup-btn{
     background-color: rgb(127, 223, 255);
 }
 
 #signup-modal{
     position: fixed;
     z-index: 1;
-    top: 7%;
+    top: 16%;
     left: 50%;
     transform: translate(-50%, 50%);
-    width: 300px;
+    width: 470px;
     border: none;
     border-radius: 2%;
     background-color: rgb(255, 255, 190);
 }
 
 #signup-form{
-    display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px;
+}
+
+#signup-form ul{
+    gap: 12px;
+    padding: 30px 10px;
 }
 
 #signup-form ul{
     list-style: none;
 }
+
+#signup-form li{
+    flex-direction: column;
+    gap: 12px;
+}
+
+#signup-form input{
+    border: 1px solid grey;
+    font-size: 1em;
+}
+
+#signup-submit{
+    width: 40%;
+    border: none;
+    background-color: rgb(255, 196, 85);
+    padding: 7px 0px;
+    transition: 0.2s ease-in-out;
+}
+
+#signup-submit:hover{
+    transform: scale(1.05);
+}
+
+#signup-submit:active{
+    transform: scale(0.95);
+}
+
+#login-modal{
+    position: fixed;
+    z-index: 1;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 280px;
+    border: none;
+    border-radius: 2%;
+    background-color: rgb(255, 255, 190);
+}
+
+#login-form{
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+#login-form ul{
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    list-style: none;
+}
+
+#login-form input{
+    font-size: 1.05em;
+    border: 1px solid grey;
+}
+
+#login-submit{
+    font-size: 1em;
+    padding: 7px 15px;
+    background-color:rgb(255, 196, 85);
+    border: none;
+    transition: 0.2s ease-in-out;
+}
+
+#login-submit:hover{
+    transform: scale(1.05);
+}
+
+#login-submit:active{
+    transform: scale(0.95);
+}
+
 
 
 

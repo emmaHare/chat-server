@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
-        <script src="front.js" defer></script>
+        <script src="script.js" defer></script>
         <title>wwroom</title>
     </head>
 <body>
@@ -39,8 +39,8 @@
                 </ul>
                 
                 <div class="register-btns">
-                    <button id="login-btn">log in</button>
-                    <button id="signup-btn">sign up</button>
+                    <button id="to-login-btn">log in</button>
+                    <button id="to-signup-btn">sign up</button>
                 </div>
             </form>
         </dialog>
@@ -54,15 +54,6 @@
                         placeholder="your username"
                         maxlength="20"
                         >
-                    </li>
-                    <li>
-                        <input 
-                        id="email-input"
-                        type="email"
-                        placeholder="email"
-                        >
-                    </li>
-                    <li>
                         <input
                         id="pword-input"
                         type="password"
@@ -71,12 +62,17 @@
                     </li>
                     <li>
                         <input 
+                        id="email-input"
+                        type="email"
+                        placeholder="email"
+                        >
+                        <input 
                         id="pword-confirm"
                         type="password"
                         placeholder="confirm password">
                     </li>
-                    <button type="submit" id="signup-submit">Create Account</button>
                 </ul>
+                <button type="submit" id="signup-submit">Create Account</button>
             </form>
         </dialog>
         <dialog id="login-modal">
@@ -95,7 +91,7 @@
                         type="password"
                         placeholder="password">
                     </li>
-                    <button type="submit">Log in</button>
+                    <button type="submit" id="login-submit">Log in</button>
                 </ul>
             </form>
         </dialog>
