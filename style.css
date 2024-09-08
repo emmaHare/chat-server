@@ -136,6 +136,20 @@ dialog::backdrop{
     background-color: rgb(127, 223, 255);
 }
 
+.back-btn:active{
+    transform: scale(0.9)
+}
+
+.go-back{
+    height: 18px;
+    width: auto;
+    transition: ease-in-out 0.2s;
+}
+
+.go-back:hover{
+    transform: scale(1.2);
+}
+
 #signup-modal{
     position: fixed;
     z-index: 1;
@@ -152,6 +166,19 @@ dialog::backdrop{
     flex-direction: column;
     align-items: center;
     padding: 20px;
+}
+
+#goback-btn1{
+    background-color: transparent;
+    border: none;
+    margin-right: auto;
+    margin-left: -12px;
+}
+
+#signup-form legend{
+    font-size: 2em;
+    font-weight: 500;
+    margin-top: -30px;
 }
 
 #signup-form ul{
@@ -202,9 +229,26 @@ dialog::backdrop{
 }
 
 #login-form{
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px;
+    padding: 20px 10px;
+}
+
+#goback-btn2{
+    background-color: transparent;
+    border: none;
+    margin-right: auto;
+    margin-left: 3px;
+    margin-bottom: 15px;
+
+}
+
+#login-form legend{
+    font-size: 2em;
+    font-weight: 500;
+    margin-top: -50px;
+    margin-bottom: 20px;
 }
 
 #login-form ul{
