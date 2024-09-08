@@ -33,3 +33,5 @@ table users: id, username, password, created_at, last_login
 -chat structure
 
 -chat styling
+
+-modal go back button functions
